@@ -1,5 +1,9 @@
+# Hello World
+select "Hellow, MYSQL!";
+select "Hello" || "SQL!";
+
 # Extract Whole Data from Form & Other Form
-select * from city;
+select * from world.city;
 select * from cmdev.emp;
 
 # Extract Whole Data with Particular Columns from Form
@@ -29,3 +33,11 @@ select * from cmdev.emp order by salary asc limit 5;
 
 # Excluded The Same Data
 select distinct * from cmdev.emp order by manager;
+
+
+
+
+
+# Obtain Particular Part From String & Length of String
+select substring("Advertisement", 2, 8);
+select length(District) from world.city;
