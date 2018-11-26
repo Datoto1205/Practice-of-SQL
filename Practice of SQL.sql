@@ -69,6 +69,28 @@ end PropertySituation from world.country;
 select Name, isnull(IndepYear) from world.country;      # 0 means not null, and vice versa.
 select Name, ifnull(IndepYear, "Empty") Checked from world.country;
 
+# Rename the form
+select a.Name, a.Continent from world.country a;
 
-select * from world.country;
 
+
+
+
+# Create A Database & Table
+drop database if exists testDataBase1;
+create database testDataBase1 character set big5;
+drop table if exists testTable1;
+use testDataBase1;
+create table testTable1(
+	Title varchar(20),
+    ID int
+);
+
+insert into testTable1 values ("Apple", 1);
+insert into testTable1 values ("Bird", 2), ("Cat", 3), ("Dog", 4);
+select * from testDataBase1.testTable1;
+
+#update testDataBase1.testTable1 set ID = ID + 100 where ID < 100;
+select * from testDataBase1.testTable1;
+
+delete from testDataBase1.testTable1 where ID = 4;
