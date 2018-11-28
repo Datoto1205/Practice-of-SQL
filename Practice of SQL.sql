@@ -81,16 +81,29 @@ drop database if exists testDataBase1;
 create database testDataBase1 character set big5;
 drop table if exists testTable1;
 use testDataBase1;
+
+# Create Columns in Table
 create table testTable1(
 	Title varchar(20),
     ID int
 );
 
+# Add More Data into Table
 insert into testTable1 values ("Apple", 1);
-insert into testTable1 values ("Bird", 2), ("Cat", 3), ("Dog", 4);
+insert into testTable1 values ("Bird", 2), ("Cat", 3), ("Dog", 4), ("Egg", 5), ("Fog", 6), ("Good", 7), ("Hot", 8);
 select * from testDataBase1.testTable1;
 
-#update testDataBase1.testTable1 set ID = ID + 100 where ID < 100;
+# Change A Lot of Data with Particular Rule
+update testDataBase1.testTable1 set ID = ID + 100 where ID < 100;
 select * from testDataBase1.testTable1;
 
+# Delete Data from Table
 delete from testDataBase1.testTable1 where ID = 4;
+select * from testDataBase1.testTable1;
+delete from testDataBase1.testTable1 order by ID limit 3;      # Order the data first, and delete the first 3 rows of data.
+select * from testDataBase1.testTable1;
+# I could follow the rule here to solve the problem of safe update mode: https://stackoverflow.com/questions/11448068/mysql-error-code-1175-during-update-in-mysql-workbench
+
+# Delete All The Data from Table
+truncate table testDataBase1.testTable1;
+select * from testDataBase1.testTable1;
