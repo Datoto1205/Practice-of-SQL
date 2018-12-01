@@ -1,3 +1,4 @@
+# The tutorial website I refered to: http://www.codedata.com.tw/database/mysql-tutorial-getting-started/
 # Hello World
 select "Hellow, MYSQL!";
 select "Hello" || "SQL!";
@@ -72,6 +73,8 @@ select Name, ifnull(IndepYear, "Empty") Checked from world.country;
 # Rename the form
 select a.Name, a.Continent from world.country a;
 
+#set
+
 
 
 
@@ -98,11 +101,31 @@ update testDataBase1.testTable1 set ID = ID + 100 where ID < 100;
 select * from testDataBase1.testTable1;
 
 # Delete Data from Table
-delete from testDataBase1.testTable1 where ID = 4;
+delete from testDataBase1.testTable1 where ID = 104;
 select * from testDataBase1.testTable1;
-delete from testDataBase1.testTable1 order by ID limit 3;      # Order the data first, and delete the first 3 rows of data.
-select * from testDataBase1.testTable1;
+delete from testDataBase1.testTable1 order by ID limit 2;      # Order the data first, and delete the first 3 rows of data.
+
 # I could follow the rule here to solve the problem of safe update mode: https://stackoverflow.com/questions/11448068/mysql-error-code-1175-during-update-in-mysql-workbench
+
+# Enum & Add New Columns
+alter table testTable1 add Region enum("Taiwan", "China", "America", "Japan", "France");      # We need to use "alter" if we want to change the constitution of the table afterward.
+
+update testTable1 set Region = "China" where Title = "Egg";      # If the data I set in the column of enum was not involved in the enum I declare above, error would occur.
+update testTable1 set Region = "Taiwan" where Title in ("Cat", "Dog", "Fog");      # Multiple conditions
+update testTable1 set Region = "Japan" where ID >= 107;
+select * from testDataBase1.testTable1;
+
+# Set
+alter table testTable1 add AlternativeCode set("A", "B", "C", "D", "E", "F", "G") first;
+update testTable1 set AlternativeCode = [A, B] where ID <= 106;
+
+# Change Columns & Delete Columns
+alter table testTable1 change AlternativeCode SecondCode int after Region;
+select * from testDataBase1.testTable1;
+
+alter table testTable1 drop Region;
+alter table testTable1 drop SecondCode;
+select * from testDataBase1.testTable1;
 
 # Delete All The Data from Table
 truncate table testDataBase1.testTable1;
